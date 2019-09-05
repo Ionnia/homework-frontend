@@ -1,15 +1,3 @@
 'use strict';
 
-const inverse = function(array, number) {
-    if(number != null){
-        let sortingPart = array.slice(number);
-        let addingPart = array.slice(0, number);
-        if(number < 0) {
-            addingPart.reverse();
-        } else {
-            sortingPart.reverse();
-        }
-        return addingPart.concat(sortingPart);
-    }
-    return array.reverse();
-}
+const inverse = (array, number = 0) => Array.isArray(array) && Number.isInteger(number) ? number < 0 ? [...array.slice(0, number).reverse(), ...array.slice(number)] : [...array.slice(0, number), ...array.slice(number).reverse()] : 'Invalid argument(s)';
