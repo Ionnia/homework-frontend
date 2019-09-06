@@ -34,11 +34,29 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -15), [ 1, 2, 3, 4, 5 ]);
 	});
 
-	QUnit.test('Проверка функции при передаче параметров неправильного типа', function (assert) {
+	QUnit.test('Проверка функции при передаче параметров неправильного типа без передачи number', function (assert) {
+		assert.deepEqual(inverse(null), 'Invalid argument(s)');
+		assert.deepEqual(inverse("asdfaasdf"), 'Invalid argument(s)');
+		assert.deepEqual(inverse(5), 'Invalid argument(s)');
+		assert.deepEqual(inverse(true), 'Invalid argument(s)');
+		assert.deepEqual(inverse({}), 'Invalid argument(s)');
+	});
+
+	QUnit.test('Проверка функции при передаче параметров неправильного типа c передачей number', function (assert) {
 		assert.deepEqual(inverse(null, null), 'Invalid argument(s)');
 		assert.deepEqual(inverse([1, 2, 3, 4, 5], null), 'Invalid argument(s)');
-		assert.deepEqual(inverse(null, 5), 'Invalid argument(s)');
 		assert.deepEqual(inverse("asdfaasdf", 5), 'Invalid argument(s)');
+		assert.deepEqual(inverse("asdfaasdf", -5), 'Invalid argument(s)');
 		assert.deepEqual(inverse([1,2,3,4,5],"5"), 'Invalid argument(s)');
+		assert.deepEqual(inverse([1,2,3,4,5],{}), 'Invalid argument(s)');
+	});
+
+	QUnit.test('Валидные тесты', function (assert) {
+		assert.deepEqual(inverse([1], 5), [1]);
+		assert.deepEqual(inverse([1], -5), [1]);
+		assert.deepEqual(inverse([1, 2, 3, 2, 1], 3), [1, 2, 3, 1, 2]);
+		assert.deepEqual(inverse([1, 2, 3, 2, 1], -2), [3, 2, 1, 2, 1]);
+		assert.deepEqual(inverse([-3, -2, -1, 0], 5), [-3, -2, -1, 0]);
+		assert.deepEqual(inverse([-3, -2, -1, 0], -5), [-3, -2, -1, 0]);
 	});
 });

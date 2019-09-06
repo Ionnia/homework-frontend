@@ -2,7 +2,7 @@
 
 const validate = (array, number) => Array.isArray(array) && Number.isInteger(number);
 const inverse = (array, number = 0) => {
-    if(!validate(array, number)){
+    if (!validate(array, number)) {
         return 'Invalid argument(s)';
     }
     const sortingPart = array.slice(number);
